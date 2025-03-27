@@ -1,0 +1,28 @@
+.editing-row {
+  background-color: rgba(0, 123, 255, 0.2) !important; /* Azul claro */
+  font-weight: bold;
+}
+
+.MuiDataGrid-cell:focus {
+  outline: none !important; /* Remove a borda ao focar */
+}
+
+.MuiDataGrid-cell.MuiDataGrid-cell--editing {
+  background-color: transparent !important; /* Remove o fundo azul ao editar */
+}
+
+.first-row {
+  background-color: rgba(0, 0, 255, 0.2) !important; /* Azul com transparência */
+}
+
+.MuiDataGrid-columnHeaders {
+  background-color: blue !important;
+  color: red !important;
+  font-weight: bold !important;
+}
+
+.custom-header {
+  background-color: blue !important;
+  color: red !important;
+  font-weight: bold !important;
+}
