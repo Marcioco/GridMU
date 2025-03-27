@@ -1,3 +1,8 @@
+body{
+  padding: 2.6rem;
+}
+
+
 .editing-row {
   background-color: rgba(0, 123, 255, 0.2) !important; /* Azul claro */
   font-weight: bold;
@@ -17,12 +22,22 @@
 
 .MuiDataGrid-columnHeaders {
   background-color: blue !important;
-  color: red !important;
+  color: white !important;
   font-weight: bold !important;
 }
 
 .custom-header {
   background-color: blue !important;
-  color: red !important;
+  /* color: red !important; */
   font-weight: bold !important;
+}
+
+.headercolor{
+  background-color: rgba(156, 158, 128,1);
+  backdrop-filter: blur(3);
+
+}
+
+.MuiDataGrid-filler{
+  background-color: rgba(156, 158, 128,1);
 }
