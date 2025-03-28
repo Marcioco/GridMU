@@ -1,10 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
-import { IconButton, TextField } from "@mui/material";
+import { CssBaseline, GlobalStyles, IconButton, TextField, ThemeProvider } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import SaveIcon from "@mui/icons-material/Save";
 import CancelIcon from "@mui/icons-material/Cancel";
 import DeleteIcon from "@mui/icons-material/Delete";
+
+
 
 const initialRows = [
     { id: 1, name: "Alice", age: 25 },
@@ -13,6 +15,7 @@ const initialRows = [
 ];
 
 export default function EditableDataGrid() {
+    
     const [rows, setRows] = useState(initialRows);
     const [editingRowId, setEditingRowId] = useState(null);
     const inputRefs = useRef({}); // Armazena os valores editados sem re-renderizar
@@ -29,12 +32,14 @@ export default function EditableDataGrid() {
 
     const handleChange = (event, field) => {
         inputRefs.current[field] = event.target.value; // Atualiza diretamente no useRef
+        
     };
 
     const handleSave = () => {
         setRows((prevRows) =>
             prevRows.map((row) =>
                 row.id === editingRowId ? { ...row, ...inputRefs.current } : row
+        
             )
             
         );
@@ -53,15 +58,17 @@ export default function EditableDataGrid() {
     };
 
     const isEditing = editingRowId !== null;
-
+    
     const columns = [
-        {
+        {   
             field: "name",
             headerName: "Nome",
             width: 150,
+
+            headerClassName:"headercolor",
             renderCell: (params) =>
                 editingRowId === params.row.id ? (
-                    <TextField
+                    <TextField                      
                         defaultValue={params.value}
                         onChange={(event) => handleChange(event, "name")}
                         size="small"
@@ -75,6 +82,7 @@ export default function EditableDataGrid() {
             field: "age",
             headerName: "Idade",
             width: 100,
+            headerClassName:"headercolor",
             renderCell: (params) =>
                 editingRowId === params.row.id ? (
                     <TextField
@@ -90,6 +98,7 @@ export default function EditableDataGrid() {
         {
             field: "actions",
             headerName: "Ações",
+            headerClassName:"headercolor",
             width: 200,
             renderCell: (params) =>
                 editingRowId === params.row.id ? (
@@ -108,23 +117,35 @@ export default function EditableDataGrid() {
                             color="primary"
                             disabled={isEditing} // Desativa enquanto outra linha está sendo editada
                         >
-                            <EditIcon />
+                            <EditIcon    />
                         </IconButton>
                         <IconButton
                             onClick={() => handleDelete(params.row.id)}
                             color="error"
                             disabled={isEditing} // Desativa enquanto edita
                         >
-                            <DeleteIcon />
+                            <DeleteIcon   />
                         </IconButton>
                     </>
                 ),
         },
     ];
-
+  
     return (
-        <div style={{ height: 400, width: "100%" }}>
-            <DataGrid rows={rows} columns={columns} disableSelectionOnClick />
-        </div>
+
+        
+        // <div 
+        
+        // style={{ height: 300, width: "70%",background:"#efebe2",
+        // boxShadow:"35px 35px 70pxrgb(237, 230, 212) -35px -35px 70px #ffffff",
+        // display: 'flex',
+        // flexDirection: 'column'
+        // }}>
+            
+            <DataGrid  getRowHeight={() => 'auto'} columnHeaderHeight={35}  rows={rows} columns={columns} disableSelectionOnClick />
+        // </div>
+       
+       
     );
+    
 }

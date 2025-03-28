@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
-import { Button, TextField } from "@mui/material";
+import { Button, GlobalStyles, TextField } from "@mui/material";
 import "./styles.css"; // Importa o CSS
 
 import { IconButton } from "@mui/material";
@@ -35,13 +35,16 @@ export default function EditableDataGrid() {
     //     }));
     // };
 
+   
+
     // Colunas da DataGrid
     const columns = [
         {
             field: "name",
             headerName: "Nome",
             width: columnWidths.name,
-            resizable: false,
+            resizable: false, 
+            
             renderCell: (params) =>
                 editingRowId === params.id ? (
                     <TextField
@@ -56,6 +59,7 @@ export default function EditableDataGrid() {
         {
             field: "age",
             headerName: "Idade",
+          
             width: columnWidths.age,
             renderCell: (params) =>
                 editingRowId === params.id ? (
@@ -72,6 +76,7 @@ export default function EditableDataGrid() {
         {
             field: "actions",
             headerName: "Ações",
+           
             width: 360,
             renderCell: (params) =>
                 editingRowId === params.id ? (
@@ -123,12 +128,15 @@ export default function EditableDataGrid() {
 
     return (
         <form onSubmit={handleSubmit}>
+           
             <DataGrid            
                 rows={rows}
                 columns={columns}
                 disableSelectionOnClick
-            // onColumnResize={handleColumnResize} // Adiciona o evento de redimensionamento
+                
+              // Adiciona o evento de redimensionamento
             />
+            
         </form>
     );
 }
