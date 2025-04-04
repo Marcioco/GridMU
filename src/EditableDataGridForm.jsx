@@ -1,10 +1,24 @@
 import React, { useState, useRef, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
+import { ptBR } from "@mui/x-data-grid/locales";
+
 import { Autocomplete, Button, IconButton, TextField } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import SaveIcon from "@mui/icons-material/Save";
 import CancelIcon from "@mui/icons-material/Cancel";
 import DeleteIcon from "@mui/icons-material/Delete";
+
+const localeText = {
+    ...ptBR.components.MuiDataGrid.defaultProps.localeText, // Mantém as traduções padrão
+    filterPanelColumns: "Colunas",
+    filterPanelOperator: "Operador",
+    filterPanelInputLabel: "Valor",
+    filterPanelInputPlaceholder: "Digite o valor",
+    filterOperatorContains: "Contém",
+    filterOperatorEquals: "Igual a",
+    filterOperatorStartsWith: "Começa com",
+    filterOperatorEndsWith: "Termina com",
+};
 
 const grupoOptions = [
     { id: 1, name: "Grupo 1" },
@@ -29,9 +43,9 @@ export default function EditableDataGrid() {
     const [isAdding, setIsAdding] = useState(false);
     const inputRefs = useRef({});
 
-    useEffect(() => {
-        console.log("Componente foi montado");
-    }, []);
+    // useEffect(() => {
+    //     console.log("Componente foi montado");
+    // }, []);
 
     const isEditing = editingRowId !== null && !isAdding;
 
@@ -82,7 +96,7 @@ export default function EditableDataGrid() {
         inputRefs.current = newRow;
     };
 
- 
+
 
     const columns = [
         {
@@ -159,7 +173,9 @@ export default function EditableDataGrid() {
             <Button onClick={handleAddNew} variant="contained" color="primary" style={{ marginBottom: 10 }} disabled={isAdding || isEditing}>
                 Adicionar Novo
             </Button>
-            <DataGrid getRowHeight={() => "auto"} columnHeaderHeight={35} rows={rows} columns={columns} disableSelectionOnClick />
+            <DataGrid getRowHeight={() => "auto"} columnHeaderHeight={35}
+                localeText={localeText}
+                rows={rows} columns={columns} disableSelectionOnClick />
         </>
     );
 }
